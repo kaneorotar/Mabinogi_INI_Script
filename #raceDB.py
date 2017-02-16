@@ -18,6 +18,7 @@ def getTextFromDict(dic, tID):
 
 targetName = "race"
 targetTXTName = ""
+localeName = ""
 outputName = "Mabi_Race"
 
 dataDBText = {}
@@ -25,13 +26,14 @@ dataDB = {}
 
 hasTXT = False
 hasXML = False
-fileList = os.listdir(".")
+fileList = os.listdir("./data/")
 for fileN in fileList:
     if hasXML and hasTXT:
         break
-    txtNameMatch = re.match(targetName+".[a-zA-Z]*.txt", fileN)
+    txtNameMatch = re.match(targetName+".([a-zA-Z]*).txt", fileN)
     if txtNameMatch is not None:
         targetTXTName = fileN
+        localeName = txtNameMatch.group(1)
         hasTXT = True
         continue
     xmlNameMatch = re.match(targetName+".xml", fileN)
@@ -47,7 +49,7 @@ if hasXML is False:
     sys.exit()
 
 today = datetime.datetime.now().strftime("%Y%m%d")
-outdir = os.getcwd()+"/patch-"+today+"/mod/"
+outdir = os.getcwd()+"/patch-"+localeName+"-"+today+"/mod/"
 print("Output: " + outdir)
 try:
     os.makedirs(outdir)
@@ -56,7 +58,7 @@ except:
 
 #targetName.XXXXX.txt
 infilename = targetTXTName
-fi = codecs.open(infilename,'r', encoding="utf-16")
+fi = codecs.open("./data/" + infilename,'r', encoding="utf-16")
 for line in fi:
     oline = re.match(r"([0-9]{0,8})\t(([^\r])+)\r\n", line)
     if oline is not None:
@@ -66,7 +68,7 @@ print(infilename + " processed.")
 
 #targetName.xml
 infilename = targetName + ".xml"
-tree = ET.parse(infilename)
+tree = ET.parse("./data/" + infilename)
 root = tree.getroot()
 for elelist in list(root):
     if elelist.tag == "RaceList":
