@@ -89,7 +89,6 @@ for ele in list(root):
 
     if ID in dataDB.keys():
         if "Locale" in ele.attrib:
-            if ele.attrib["Locale"] == "korea":
                 continue
 
     dataDB[ID] = finalName
