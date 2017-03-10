@@ -7,6 +7,8 @@ Work on the following data files:
  - minimapinfo.xml & minimapinfo.*LOCALE_NAME*.txt (Region Info)
  - optionset.xml & optionset.*LOCALE_NAME*.txt (Enchant Info)
  - race.xml & race.*LOCALE_NAME*.txt (Race Info)
+ - characterstyle.xml & characterstyle.*LOCALE_NAME*.txt (Face, HairStyle & Head Info)
+ - faceemotion2.xml & faceemotion2.*LOCALE_NAME*.txt (Eye & Mouth Style Info)
 
 ### Usage
 
