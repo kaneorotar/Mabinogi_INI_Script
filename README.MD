@@ -9,6 +9,8 @@ Work on the following data files:
  - race.xml & race.*LOCALE_NAME*.txt (Race Info)
  - characterstyle.xml & characterstyle.*LOCALE_NAME*.txt (Face, HairStyle & Head Info)
  - faceemotion2.xml & faceemotion2.*LOCALE_NAME*.txt (Eye & Mouth Style Info)
+ - dungeondb2.xml & dungeondb.*LOCALE_NAME*.txt (Uladh Dungeon Info)
+ - dungeon_ruin.xml & dungeon_ruin.*LOCALE_NAME*.txt (Iria Ruin Info)
 
 ### Usage
 

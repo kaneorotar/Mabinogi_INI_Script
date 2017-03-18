@@ -7,7 +7,9 @@ import datetime
 import xml.etree.ElementTree as ET
 
 def getTextID(txt):
-    txtgp = re.search("_LT\[xml.[a-zA-Z0-9]*.([0-9]+)\]", txt)
+    txtgp = re.search("_LT\[xml.[^\.]*.([0-9]+)\]", txt)
+    if txtgp is None:
+        return ""
     return int(txtgp.group(1))
 
 def getTextFromDict(dic, tID):
@@ -17,7 +19,7 @@ def getTextFromDict(dic, tID):
         return ""
 
 targetName = "faceemotion2"
-targetTXTName = ""
+targetTXTName = targetName
 localeName = ""
 outputName = "Mabi_Faceemotion2"
 
@@ -30,7 +32,7 @@ fileList = os.listdir("./data/")
 for fileN in fileList:
     if hasXML and hasTXT:
         break
-    txtNameMatch = re.match(targetName+".([a-zA-Z]*).txt", fileN)
+    txtNameMatch = re.match(targetTXTName+".([a-zA-Z]*).txt", fileN)
     if txtNameMatch is not None:
         targetTXTName = fileN
         localeName = txtNameMatch.group(1)
@@ -42,7 +44,7 @@ for fileN in fileList:
         continue
 
 if hasTXT is False:
-    print("Missing "+targetName+" TXT file.")
+    print("Missing "+targetTXTName+" TXT file.")
     sys.exit()
 if hasXML is False:
     print("Missing "+targetName+" XML file.")

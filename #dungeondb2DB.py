@@ -18,10 +18,10 @@ def getTextFromDict(dic, tID):
     else:
         return ""
 
-targetName = "itemdb"
-targetTXTName = targetName
+targetName = "dungeondb2"
+targetTXTName = "dungeondb"
 localeName = ""
-outputName = "Mabi_Item"
+outputName = "Mabi_Dungeondb2"
 
 dataDBText = {}
 dataDB = {}
@@ -72,29 +72,31 @@ print(infilename + " processed.")
 infilename = targetName + ".xml"
 tree = ET.parse("./data/" + infilename)
 root = tree.getroot()
-for ele in list(root):
-    ID = int(ele.attrib["ID"])
+for elegroup in list(root):
+    for ele in elegroup:
+        if "name" not in ele.attrib:
+            continue
 
-    LocalNameID = getTextID(ele.attrib["Text_Name1"])
+        ID = ele.attrib["name"]
 
-    if "Text_Name0" in ele.attrib:
-        Name = ele.attrib["Text_Name0"]
-    else:
-        Name = ""
-    LocalName = getTextFromDict(dataDBText, LocalNameID)
+        LocalNameID = 0
+        LocalName = ""
+        if "localname" in ele.attrib:
+            LocalNameID = getTextID(ele.attrib["localname"])
+        LocalName = getTextFromDict(dataDBText, LocalNameID)
 
-    finalName = "No." + str(ID)
-    if LocalName != "":
-        finalName = LocalName
-    elif Name != "":
-        finalName = Name
+        finalName = str(ID)
+        if LocalName != "":
+            finalName = LocalName
+        elif ID != "":
+            finalName = ID
 
-    if ID in dataDB.keys():
-        if "Locale" in ele.attrib:
-            if ele.attrib["Locale"] != localeName:
-                continue
+        # if ID in dataDB.keys():
+        #     if "Locale" in ele.attrib:
+        #         if ele.attrib["Locale"] != "china":
+        #             continue
 
-    dataDB[ID] = finalName
+        dataDB[ID] = finalName
 
 print(infilename + " processed.")
 

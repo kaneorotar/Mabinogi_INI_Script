@@ -6,4 +6,6 @@ python #minimapinfoDB.py
 python #raceDB.py
 python #characterstyleDB.py
 python #faceemotion2DB.py
+python #dungeondb2DB.py
+python #dungeon_ruinDB.py
 pause
