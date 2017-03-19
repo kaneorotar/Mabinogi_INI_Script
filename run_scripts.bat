@@ -8,4 +8,5 @@ python #characterstyleDB.py
 python #faceemotion2DB.py
 python #dungeondb2DB.py
 python #dungeon_ruinDB.py
+python #skillinfoDB.py
 pause

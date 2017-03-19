@@ -11,6 +11,7 @@ Work on the following data files:
  - faceemotion2.xml & faceemotion2.*LOCALE_NAME*.txt (Eye & Mouth Style Info)
  - dungeondb2.xml & dungeondb.*LOCALE_NAME*.txt (Uladh Dungeon Info)
  - dungeon_ruin.xml & dungeon_ruin.*LOCALE_NAME*.txt (Iria Ruin Info)
+ - skillinfo.xml & skillinfo.*LOCALE_NAME*.txt (Skill Info)
 
 ### Usage
 
