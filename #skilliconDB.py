@@ -4,7 +4,7 @@ import codecs
 import sys
 import re
 import datetime
-from lxml import etree
+import xml.etree.ElementTree as ET
 
 def getTextID(txt):
     txtgp = re.search("_LT\[xml.[^\.]*.([0-9]+)\]", txt)
@@ -18,10 +18,10 @@ def getTextFromDict(dic, tID):
     else:
         return ""
 
-targetName = "itemdb"
+targetName = "skillinfo"
 targetTXTName = targetName
 localeName = ""
-outputName = "Mabi_Item"
+outputName = "Mabi_Skillicon"
 
 dataDBText = {}
 dataDB = {}
@@ -70,32 +70,29 @@ print(infilename + " processed.")
 
 #targetName.xml
 infilename = targetName + ".xml"
-parser = etree.XMLParser(recover=True)
-tree = etree.parse("./data/" + infilename, parser)
+tree = ET.parse("./data/" + infilename)
 root = tree.getroot()
-for ele in list(root):
-    ID = int(ele.attrib["ID"])
+for elelist in list(root):
+    for ele in elelist:
+        ID = int(ele.attrib["SkillID"])
 
-    LocalNameID = getTextID(ele.attrib["Text_Name1"])
+        finalName = "0,0,0"
+        if "ImageFile" in ele.attrib:
+            imgName = ele.attrib["ImageFile"].lower()
+            imgG = re.search("data/gfx/image/gui_icon_skill_([^\.]*).dds", imgName)
+            if imgG != None:
+                imgNameIdx = int(imgG.group(1))
+                if "PositionX" in ele.attrib and "PositionY" in ele.attrib:
+                    posX = int(ele.attrib["PositionX"])
+                    posY = int(ele.attrib["PositionY"])
+                    finalName = str(imgNameIdx)+','+str(posX)+','+str(posY)
 
-    if "Text_Name0" in ele.attrib:
-        Name = ele.attrib["Text_Name0"]
-    else:
-        Name = ""
-    LocalName = getTextFromDict(dataDBText, LocalNameID)
+        if ID in dataDB.keys():
+            if "Locale" in ele.attrib:
+                if ele.attrib["Locale"] != localeName:
+                    continue
 
-    finalName = "No." + str(ID)
-    if LocalName != "":
-        finalName = LocalName
-    elif Name != "":
-        finalName = Name
-
-    if ID in dataDB.keys():
-        if "Locale" in ele.attrib:
-            if ele.attrib["Locale"] != localeName:
-                continue
-
-    dataDB[ID] = finalName
+        dataDB[ID] = finalName
 
 print(infilename + " processed.")
 

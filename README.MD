@@ -12,10 +12,12 @@ Work on the following data files:
  - dungeondb2.xml & dungeondb.*LOCALE_NAME*.txt (Uladh Dungeon Info)
  - dungeon_ruin.xml & dungeon_ruin.*LOCALE_NAME*.txt (Iria Ruin Info)
  - skillinfo.xml & skillinfo.*LOCALE_NAME*.txt (Skill Info)
+ - skillicon.xml & skillicon.*LOCALE_NAME*.txt (Skill Icon Info)
 
 ### Usage
 
  1. Install Python (2.X or 3.X)
- 2. Place the xml and txt files in the *data* folder
- 3. Run 'run_scripts.bat'
- 4. The ini files should be in the folder './patch-LOCALE_NAME-YYYYMMDD/mod/'
+ 2. Install lxml package (pip install lxml)
+ 3. Place the xml and txt files in the *data* folder
+ 4. Run 'run_scripts.bat'
+ 5. The ini files should be in the folder './patch-LOCALE_NAME-YYYYMMDD/mod/'

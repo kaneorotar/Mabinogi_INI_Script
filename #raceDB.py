@@ -4,7 +4,7 @@ import codecs
 import sys
 import re
 import datetime
-import xml.etree.ElementTree as ET
+from lxml import etree
 
 def getTextID(txt):
     txtgp = re.search("_LT\[xml.[^\.]*.([0-9]+)\]", txt)
@@ -70,7 +70,8 @@ print(infilename + " processed.")
 
 #targetName.xml
 infilename = targetName + ".xml"
-tree = ET.parse("./data/" + infilename)
+parser = etree.XMLParser(recover=True)
+tree = etree.parse("./data/" + infilename, parser)
 root = tree.getroot()
 for elelist in list(root):
     if elelist.tag == "RaceList":
